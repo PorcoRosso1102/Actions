@@ -214,7 +214,7 @@ def should_execute():
 
 def redoc_creator_main():
     
-    robot_url = robot_url = os.environ.get('ROBOT_URL')
+    robot_url = os.environ.get('ROBOT_URL')
     send_msg_to_maintainer(robot_url)
 
 #    """判断是否应该执行, 每两周执行一次"""
