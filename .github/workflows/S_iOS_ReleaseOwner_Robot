@@ -1,0 +1,30 @@
+name: 🤖 S_iOS发版机器人
+on:
+  workflow_dispatch:
+  schedule:
+    # https://crontab.guru/examples.html
+    - cron: "0 10 * * Mon"
+jobs:
+  weekly-robot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repo
+        uses: actions/checkout@master
+
+      - name: Execute PY Script # run the run.py to get the latest data
+        env:
+          ROBOT_URL: ${{ secrets.RELEASEOWNER_ROBOT_WEBHOOK }}
+#          REDOC_TOKEN: ${{ secrets.REDOC_TOKEN }}
+#          REDOC_COOKIE: ${{ secrets.REDOC_COOKIE }}
+#          REDOC_DOMAIN: ${{ secrets.REDOC_DOMAIN }}
+#          REDOC_SHORTCUT_ID: ${{ secrets.S_REDOC_SHORTCUT_ID }}
+#          REDOC_SPACE_ID: ${{ secrets.S_REDOC_SPACE_ID }}
+#           复制原始文档的id
+#          REDOC_ORIGIN_SHORTCUT_ID: ${{ secrets.S_REDOC_ORIGIN_SHORTCUT_ID }}
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install requests
+          python3 ./scripts/weekly_release_owner.py
+
+      - name: Automated Change
+        uses: stefanzweifel/git-auto-commit-action@v5
