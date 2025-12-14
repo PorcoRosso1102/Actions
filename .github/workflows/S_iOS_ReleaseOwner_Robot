@@ -24,7 +24,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install requests
-          python3 ./scripts/weekly_release_owner.py
+          python3 ./.github/scripts/weekly_release_owner.py
 
       - name: Automated Change
         uses: stefanzweifel/git-auto-commit-action@v5
